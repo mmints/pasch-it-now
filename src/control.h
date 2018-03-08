@@ -6,6 +6,7 @@ class ControlComponent : public Component
 
 //	float * stack_hight; // This is a really messy hack <----!!!  HUGE TODO!
 	float time_fire_pressed = 0.00001f;	// time from the last time the fire button was pressed
+	float newTime;
 
 
 public:
@@ -28,24 +29,29 @@ public:
 		enabled = true;
 		SDL_Log("Controller Enabled");
 
+		newTime = 0.f;
+
 		Component::Init();
 	}
 
 	float prev_y = 0;
-	float newTime;
 
 	virtual void Update(float dt)
 	{
-		if (prev_y != go->verticalPosition)
-		{
-			newTime = system->getElapsedTime();
+		
+		{ // Timestemp for moving control
+			if (prev_y != go->verticalPosition)
+			{
+				newTime = system->getElapsedTime();
+			}
+
+			if (((system->getElapsedTime()) - newTime) > 0.5f)
+			{
+				enabled = false;
+			}
+			prev_y = go->verticalPosition;
 		}
 
-		if (((system->getElapsedTime()) - newTime) > 0.5f)
-		{
-			enabled = false;
-		}
-		
 		b2Vec2 position = body->GetPosition();
 		float32 angle = body->GetAngle();
 
@@ -88,7 +94,6 @@ public:
 
 			}
 
-		prev_y = go->verticalPosition;
 	}
 
 	//virtual void Update(float dt)
