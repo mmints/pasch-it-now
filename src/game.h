@@ -29,8 +29,8 @@ public:
 		{ // canvas for physic enviroment
 			canvas = new GameObject();
 
-			PhysicsComponent * base_line = new PhysicsComponent();
-			base_line->CreateEdge(system, world, canvas, &game_objects, 0, 0, 640, 0);
+			//PhysicsComponent * base_line = new PhysicsComponent();
+			//base_line->CreateEdge(system, world, canvas, &game_objects, 0, 0, 640, 0);
 
 			PhysicsComponent * base_left = new PhysicsComponent();
 			base_left->CreateEdge(system, world, canvas, &game_objects, 64, 0, 64, 576);
@@ -39,7 +39,7 @@ public:
 			base_right->CreateEdge(system, world, canvas, &game_objects, 384, 0, 384, 576);
 
 			canvas->Create();
-			canvas->AddComponent(base_line);
+			//canvas->AddComponent(base_line);
 			canvas->AddComponent(base_left);
 			canvas->AddComponent(base_right);
 			game_objects.insert(canvas);
@@ -67,7 +67,6 @@ public:
 			base->AddComponent(base_physics);
 			base->AddComponent(base_render);
 			game_objects.insert(base);
-
 		}
 
 		generator = new Generator();
