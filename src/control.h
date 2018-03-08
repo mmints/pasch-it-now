@@ -3,8 +3,8 @@ class ControlComponent : public Component
 	PhysicsComponent * physic;
 	b2Body * body;
 
-	float time_fire_pressed = 0;	// time from the last time the fire button was pressed
-	float newTime;
+	float timeStep_flip;
+	float timeStep_update;
 	float prev_y;
 
 public:
@@ -22,12 +22,11 @@ public:
 		enabled = true;
 		SDL_Log("Controller Enabled");
 
-		newTime = 0.f;
+		timeStep_flip = 0.f;
+		timeStep_update = 0.f;
 		prev_y = -100.f;
 		Component::Init();
 	}
-
-
 
 	virtual void Update(float dt)
 	{
@@ -37,10 +36,10 @@ public:
 			{ // Timestemp for moving control
 				if (prev_y != go->verticalPosition)
 				{
-					newTime = system->getElapsedTime();
+					timeStep_update = system->getElapsedTime();
 				}
 
-				if (((system->getElapsedTime()) - newTime) > 0.1f)
+				if (((system->getElapsedTime()) - timeStep_update) > 0.1f)
 				{
 					enabled = false;
 				}
@@ -89,10 +88,10 @@ public:
 	bool CanFlip()
 	{
 		// shoot just if enough time passed by
-		if ((system->getElapsedTime() - time_fire_pressed) < 0.2f)
+		if ((system->getElapsedTime() - timeStep_flip) < 0.2f)
 			return false;
 
-		time_fire_pressed = system->getElapsedTime();
+		timeStep_flip = system->getElapsedTime();
 
 		return true;
 	}
