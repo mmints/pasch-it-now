@@ -6,9 +6,11 @@ class ControlComponent : public Component
 	float time_fire_pressed = 0;	// time from the last time the fire button was pressed
 	float newTime;
 	float prev_y;
-	bool enabled;
 
 public:
+	bool enabled;
+
+
 	virtual void Create(AvancezLib* system, Tetromino * tetromino, std::set<GameObject*> * game_objects, PhysicsComponent * physic)
 	{
 		Component::Create(system, tetromino, game_objects);
