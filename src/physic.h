@@ -182,8 +182,6 @@ public:
 		b2Vec2 position = body->GetPosition();
 		float32 angle = body->GetAngle();
 
-		// SDL_Log("Tetromino::position.y = %.6f", position.y);
-
 		go->horizontalPosition = position.x - size_x;
 		go->verticalPosition = 576 - (position.y + size_y); // Hard coded Window height! Change in final version! <---------!!!!!!!!!!!
 		go->angle = angle * (-180 / 3.14f);
