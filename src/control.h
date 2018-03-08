@@ -44,8 +44,6 @@ public:
 		if (((system->getElapsedTime()) - newTime) > 0.5f)
 		{
 			enabled = false;
-			SDL_Log("Controller Is Disabled");
-
 		}
 		
 		b2Vec2 position = body->GetPosition();
