@@ -2,30 +2,22 @@ class ControlComponent : public Component
 {
 	PhysicsComponent * physic;
 	b2Body * body;
-//	bool on_stack; // This is a really messy hack <----!!!  HUGE TODO!
 
-//	float * stack_hight; // This is a really messy hack <----!!!  HUGE TODO!
-	float time_fire_pressed = 0.00001f;	// time from the last time the fire button was pressed
+	float time_fire_pressed = 0;	// time from the last time the fire button was pressed
 	float newTime;
 
+	bool enabled;
 
 public:
-	bool enabled;
 	virtual void Create(AvancezLib* system, Tetromino * tetromino, std::set<GameObject*> * game_objects, PhysicsComponent * physic)
 	{
 		Component::Create(system, tetromino, game_objects);
 		this->body = physic->body;
-//		this->stack_hight = stack_hight; // This is a really messy hack <----!!!  HUGE TODO!
 	}
 
 	virtual void Init()
 	{
 //		SDL_Log("ControlComponent::Init() -> set on_stack = false");
-//		on_stack = false; // This is a really messy hack <----!!!HUGE TODO!
-		if (enabled == false)
-		{
-			SDL_Log("Controller Disabled");
-		}
 		enabled = true;
 		SDL_Log("Controller Enabled");
 
@@ -38,14 +30,17 @@ public:
 
 	virtual void Update(float dt)
 	{
-		
+		if (enabled)
+		{		
+		SDL_Log("Y Coordinate of Tetromino: %.6f", go->verticalPosition);
+
 		{ // Timestemp for moving control
 			if (prev_y != go->verticalPosition)
 			{
 				newTime = system->getElapsedTime();
 			}
 
-			if (((system->getElapsedTime()) - newTime) > 0.5f)
+			if (((system->getElapsedTime()) - newTime) > 0.1f)
 			{
 				enabled = false;
 			}
@@ -93,7 +88,7 @@ public:
 				}
 
 			}
-
+		}
 	}
 
 	//virtual void Update(float dt)
