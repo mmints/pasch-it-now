@@ -26,13 +26,13 @@ public:
 		Component::Init();
 	}
 
-	float prev_y = 0;
+	float prev_y = -100.f;
 
 	virtual void Update(float dt)
 	{
 		if (enabled)
 		{		
-		SDL_Log("Y Coordinate of Tetromino: %.6f", go->verticalPosition);
+		  SDL_Log("Y Coordinate of Tetromino: %.6f", go->verticalPosition);
 
 		{ // Timestemp for moving control
 			if (prev_y != go->verticalPosition)
@@ -42,6 +42,7 @@ public:
 
 			if (((system->getElapsedTime()) - newTime) > 0.1f)
 			{
+				SDL_Log("Controller Disabled");
 				enabled = false;
 			}
 			prev_y = go->verticalPosition;
