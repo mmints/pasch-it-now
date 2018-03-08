@@ -128,8 +128,7 @@ public:
 		{
 			(*go)->Init();
 		}
-
-		enabled = true;
+		GameObject::Init();
 	}
 
 	virtual void Update(float delta_time)
