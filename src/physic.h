@@ -192,9 +192,4 @@ public:
 			go->Send(GAME_OVER);
 		}
 	}
-
-	virtual ~PhysicsComponent()
-	{
-		world->DestroyBody(body);
-	}
 };
