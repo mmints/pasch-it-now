@@ -1,6 +1,3 @@
-// const float			FIRE_TIME_INTERVAL = .5f;
-// float game_speed = 1.f;
-
 #include <ctime>
 
 // External Libraries
@@ -43,7 +40,6 @@ int main( int argc, char** argv)
 	{
 		float newTime = system.getElapsedTime();
 		float dt = newTime - lastTime;
-//		dt = dt * game_speed;
 		lastTime = newTime;
 
 		game.Draw();
