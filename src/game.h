@@ -16,6 +16,8 @@ class Game : public GameObject
 
 	Tetromino * base;
 
+	int points;
+
 public:
 	virtual void Create(AvancezLib* system)
 	{
@@ -124,6 +126,8 @@ public:
 	virtual void Init()
 	{
 		game_over = false;
+		points = 0;
+		SDL_Log("Points: %i", points);
 		for (auto go = game_objects.begin(); go != game_objects.end(); go++)
 		{
 			(*go)->Init();
@@ -148,6 +152,8 @@ public:
 		{
 			(*go)->Update(delta_time);
 		}
+
+		countPoints(generator->can_spawn);
 	}
 
 	virtual void Draw()
@@ -155,6 +161,14 @@ public:
 		char msg[1024];
 		sprintf_s(msg, "Test Enviroment");
 		system->drawText(450, 112, msg);
+
+		sprintf_s(msg, "SCORE");
+		system->drawText(500, 50, msg);
+
+		sprintf_s(msg, "%i", points);
+		system->drawText(500, 200, msg);
+
+
 
 		if (IsGameOver())
 		{
@@ -183,5 +197,14 @@ public:
 			(*go)->Destroy();
 
 		delete world;
+	}
+
+	virtual void countPoints(bool &on_stack)
+	{
+		if (on_stack)
+		{
+			points += 1;
+			SDL_Log("Points: %i", points);
+		}		
 	}
 };

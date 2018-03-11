@@ -1,6 +1,8 @@
 class Generator : public GameObject
 {
 public:
+	bool can_spawn;
+
 	virtual void Init()
 	{
 		SDL_Log("Generator::Init");
@@ -24,13 +26,16 @@ class GeneratorBehaviourComponent : public Component
 	PhysicsComponent * physic;
 	ControlComponent * controller;
 
+	Generator * generator;
+
 public:
-	virtual void Create(AvancezLib* system, b2World* world, GameObject * go, std::set<GameObject*> * game_objects, ObjectPool<Tetromino> * tetromino_pool)
+	virtual void Create(AvancezLib* system, b2World* world, Generator * generator, std::set<GameObject*> * game_objects, ObjectPool<Tetromino> * tetromino_pool)
 	{
-		Component::Create(system, go, game_objects);
+		Component::Create(system, generator, game_objects);
 
 		this->tetromino_pool = tetromino_pool;
 		this->world = world;
+		this->generator = generator;
 	}
 
 	virtual void Init()
@@ -75,8 +80,12 @@ public:
 	bool CanSpawn()
 	{
 		if (!(controller->enabled))
+		{
+			generator->can_spawn = true;
 			return true;
+		}
 
+		generator->can_spawn = false;
 		return false;
 	}
 };
