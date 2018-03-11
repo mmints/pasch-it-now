@@ -165,8 +165,12 @@ public:
 		sprintf_s(msg, "SCORE");
 		system->drawText(500, 50, msg);
 
+		sprintf_s(msg, "TETROMINOS");
+		system->drawText(470, 180, msg);
+
+
 		sprintf_s(msg, "%i", points);
-		system->drawText(500, 200, msg);
+		system->drawText(520, 210, msg);
 
 
 
