@@ -3,7 +3,7 @@ class GUI : public GameObject
 public:
 	virtual void Init()
 	{
-		SDL_Log("GUI is loaded");
+		SDL_Log("GUI::Init");
 		GameObject::Init();
 	}
 

@@ -3,13 +3,13 @@ class Generator : public GameObject
 public:
 	virtual void Init()
 	{
-		SDL_Log("GUI is loaded");
+		SDL_Log("Generator::Init");
 		GameObject::Init();
 	}
 
 	virtual void Destroy()
 	{
-		SDL_Log("GUI::Destroy");
+		SDL_Log("Generator::Destroy");
 		GameObject::Destroy();
 
 	}
