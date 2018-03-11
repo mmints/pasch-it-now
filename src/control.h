@@ -52,35 +52,30 @@ public:
 			AvancezLib::KeyStatus keys;
 			system->getKeyStatus(keys);
 
-			if (enabled)
+			if (keys.right)
 			{
-				if (keys.right)
+				body->SetTransform(b2Vec2(position.x + 0.2f, position.y), angle);
+			}
+			else if (keys.left)
+			{
+				body->SetTransform(b2Vec2(position.x - 0.2f, position.y), angle);
+			}
+			
+			if (keys.up)
+			{
+				if (CanFlip())
 				{
-					body->SetTransform(b2Vec2(position.x + 0.2f, position.y), angle);
+					angle += 90.f * (3.14f / 180.f);
+					body->SetTransform(b2Vec2(position.x, position.y), angle);
 				}
-				else if (keys.left)
+			}
+			else if (keys.down)
+			{
+				if (CanFlip())
 				{
-					body->SetTransform(b2Vec2(position.x - 0.2f, position.y), angle);
+					angle -= (90.f * (3.14f / 180.f));
+					body->SetTransform(b2Vec2(position.x, position.y), angle);
 				}
-
-
-				if (keys.up)
-				{
-					if (CanFlip())
-					{
-						angle += 90.f * (3.14f / 180.f);
-						body->SetTransform(b2Vec2(position.x, position.y), angle);
-					}
-				}
-				else if (keys.down)
-				{
-					if (CanFlip())
-					{
-						angle -= (90.f * (3.14f / 180.f));
-						body->SetTransform(b2Vec2(position.x, position.y), angle);
-					}
-				}
-
 			}
 		}
 	}
