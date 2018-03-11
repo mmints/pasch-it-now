@@ -129,7 +129,7 @@ bool AvancezLib::update()
 				key.down = false;
 				break;
 			case SDLK_r:
-				key.reset = true;
+				key.reset = false;
 				break;
 			}
 		}
