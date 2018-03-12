@@ -83,8 +83,7 @@ public:
 		tetromino_pool.Create(100);
 		for (auto tetromino = tetromino_pool.pool.begin(); tetromino != tetromino_pool.pool.end(); tetromino++)
 		{
-			int r = rand() % 7;
-			Tetromino::TetrominoType tetromino_type = Tetromino::TetrominoType(r);
+			Tetromino::TetrominoType tetromino_type = Tetromino::TetrominoType(rand() % 7);
 			(*tetromino)->Create(tetromino_type);
 
 			RenderComponent * render = new RenderComponent();
