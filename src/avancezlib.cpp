@@ -46,6 +46,7 @@ bool AvancezLib::init(int width, int height)
 	SDL_SetRenderDrawColor(renderer, 192, 219, 177, 255); // Color for the final game
 //	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // Cool gray for testing enviroment 8)
 
+
 	//Clear screen
 	SDL_RenderClear(renderer);
 
