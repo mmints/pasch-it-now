@@ -1,4 +1,6 @@
 #include <ctime>
+#include <iostream>
+#include <fstream>
 
 // External Libraries
 #include "Box2D\Box2D.h"

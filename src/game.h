@@ -158,19 +158,20 @@ public:
 	virtual void Draw()
 	{
 		char msg[1024];
-		sprintf_s(msg, "Test Enviroment");
-		system->drawText(450, 112, msg);
+		//sprintf_s(msg, "Test Enviroment");
+		//system->drawText(450, 112, msg);
 
-		sprintf_s(msg, "SCORE");
-		system->drawText(500, 50, msg);
+		//sprintf_s(msg, "SCORE");
+		//system->drawText(500, 50, msg);
 
-		sprintf_s(msg, "TETROMINOS");
-		system->drawText(470, 180, msg);
-
+		//sprintf_s(msg, "TETROMINOS");
+		//system->drawText(470, 180, msg);
 
 		sprintf_s(msg, "%i", points);
 		system->drawText(520, 210, msg);
 
+		sprintf_s(msg, "%i", getHighScore());
+		system->drawText(540, 210, msg);
 
 
 		if (IsGameOver())
@@ -184,7 +185,10 @@ public:
 	virtual void Receive(Message m)
 	{
 		if (m == GAME_OVER)
+		{
+			setHighScore(this->points);
 			game_over = true;
+		}
 	}
 
 	bool IsGameOver()
@@ -209,5 +213,24 @@ public:
 			points += 1;
 			SDL_Log("Points: %i", points);
 		}		
+	}
+
+	virtual void setHighScore(int new_high_score)
+	{
+		std::ofstream high_score_file;
+		high_score_file.open("data/HIGHSCORE.txt");
+		high_score_file << new_high_score;
+		high_score_file.close();
+	}
+
+	virtual int getHighScore()
+	{
+		int high_score;
+		std::ifstream high_score_file;
+		high_score_file.open("data/HIGHSCORE.txt");
+		high_score_file >> high_score;
+		high_score_file.close();
+
+		return high_score;
 	}
 };
