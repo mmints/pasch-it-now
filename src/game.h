@@ -163,7 +163,7 @@ public:
 		system->drawText(520, 210, msg);
 
 		sprintf_s(msg, "%i", high_score);
-		system->drawText(540, 210, msg);
+		system->drawText(520, 330, msg);
 
 
 		if (IsGameOver())
