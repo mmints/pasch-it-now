@@ -16,7 +16,7 @@ class Game : public GameObject
 	std::set<GameObject*> game_objects;	// http://www.cplusplus.com/reference/set/set/
 
 public:
-	virtual void Create(AvancezLib* system)
+	void Create(AvancezLib* system)
 	{
 		SDL_Log("Game::Create");
 		this->system = system;
@@ -121,7 +121,7 @@ public:
 
 	}
 
-	virtual void Init()
+	void Init()
 	{
 		game_over = false;
 		points = 0; 		SDL_Log("Points: %i", points);
@@ -134,9 +134,9 @@ public:
 		GameObject::Init();
 	}
 
-	virtual void Update(float delta_time)
+	void Update(float delta_time)
 	{
-		if (IsGameOver())
+		if (game_over)
 		{
 			delta_time = 0.f;
 		}
@@ -155,26 +155,7 @@ public:
 		countPoints(generator->can_spawn);
 	}
 
-	virtual void Draw()
-	{
-		char msg[1024];
-
-		sprintf_s(msg, "%i", points);
-		system->drawText(520, 210, msg);
-
-		sprintf_s(msg, "%i", high_score);
-		system->drawText(520, 330, msg);
-
-
-		if (IsGameOver())
-		{
-			sprintf_s(msg, "GAME OVER");
-			system->drawText(128, 112, msg);
-		}
-
-	}
-
-	virtual void Receive(Message m)
+	void Receive(Message m)
 	{
 		if (m == GAME_OVER)
 		{
@@ -185,12 +166,7 @@ public:
 		}
 	}
 
-	bool IsGameOver()
-	{
-		return game_over;
-	}
-
-	virtual void Destroy()
+	void Destroy()
 	{
 		SDL_Log("Game::Destroy");
 
@@ -200,7 +176,26 @@ public:
 		delete world;
 	}
 
-	virtual void countPoints(bool &on_stack)
+	/*The following functions are additional*/
+
+	void Draw()
+	{
+		char msg[1024];
+
+		sprintf_s(msg, "%i", points);
+		system->drawText(520, 210, msg);
+
+		sprintf_s(msg, "%i", high_score);
+		system->drawText(520, 330, msg);
+
+		if (game_over)
+		{
+			sprintf_s(msg, "GAME OVER");
+			system->drawText(128, 112, msg);
+		}
+	}
+
+	void countPoints(bool &on_stack)
 	{
 		if (on_stack)
 		{
@@ -209,7 +204,7 @@ public:
 		}		
 	}
 
-	virtual void setHighScore(int new_high_score)
+	void setHighScore(int new_high_score)
 	{
 		std::ofstream high_score_file;
 		high_score_file.open("data/HIGHSCORE.txt");
@@ -217,7 +212,7 @@ public:
 		high_score_file.close();
 	}
 
-	virtual int getHighScore()
+	int getHighScore()
 	{
 		int high_score;
 		std::ifstream high_score_file;
