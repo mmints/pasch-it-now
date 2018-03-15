@@ -43,9 +43,7 @@ bool AvancezLib::init(int width, int height)
 
 	//Initialize renderer color
 	
-	SDL_SetRenderDrawColor(renderer, 192, 219, 177, 255); // Color for the final game
-//	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // Cool gray for testing enviroment 8)
-
+	SDL_SetRenderDrawColor(renderer, 192, 219, 177, 255);
 
 	//Clear screen
 	SDL_RenderClear(renderer);
@@ -149,7 +147,6 @@ bool AvancezLib::update()
 
 Sprite * AvancezLib::createSprite(const char * path)
 {
-//	SDL_Surface* surf = SDL_LoadBMP(path);
 	SDL_Surface* surf = IMG_Load(path); // Modfication for loading png files
 	if (surf == NULL)
 	{
@@ -226,9 +223,6 @@ void Sprite::draw(int x, int y, float angle)
 	SDL_Point center;
 	center.x = (int)(rect.w / 2.f);
 	center.y = (int)(rect.h / 2.f);
-
-	//Render texture to screen
-//	SDL_RenderCopy(renderer, texture, NULL, &rect);
 
 	SDL_RenderCopyEx(renderer,
 		texture,
