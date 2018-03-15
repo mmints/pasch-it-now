@@ -157,7 +157,6 @@ public:
 		fixtureDef.density = 0.8f;
 		fixtureDef.friction = 0.0f;
 
-
 		b2EdgeShape shape;
 		shape.Set(b2Vec2(begin_x, begin_y), b2Vec2(end_x, end_y));
 		fixtureDef.shape = &shape;
@@ -166,7 +165,6 @@ public:
 
 	virtual void Update(float dt)
 	{
-
 		b2Vec2 position = body->GetPosition();
 		float32 angle = body->GetAngle();
 
