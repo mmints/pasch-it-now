@@ -238,4 +238,3 @@ void Sprite::destroy()
 {
 	SDL_DestroyTexture(texture);
 }
-
