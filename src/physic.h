@@ -155,7 +155,7 @@ public:
 
 		b2FixtureDef fixtureDef;
 		fixtureDef.density = 0.8f;
-		fixtureDef.friction = 1.0f;
+		fixtureDef.friction = 0.0f;
 
 
 		b2EdgeShape shape;
