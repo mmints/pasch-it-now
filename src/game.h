@@ -17,6 +17,7 @@ class Game : public GameObject
 	Tetromino * base;
 
 	int points;
+	int high_score;
 
 public:
 	virtual void Create(AvancezLib* system)
@@ -126,6 +127,7 @@ public:
 	{
 		game_over = false;
 		points = 0;
+		high_score = getHighScore();
 		SDL_Log("Points: %i", points);
 		for (auto go = game_objects.begin(); go != game_objects.end(); go++)
 		{
@@ -170,7 +172,7 @@ public:
 		sprintf_s(msg, "%i", points);
 		system->drawText(520, 210, msg);
 
-		sprintf_s(msg, "%i", getHighScore());
+		sprintf_s(msg, "%i", high_score);
 		system->drawText(540, 210, msg);
 
 
@@ -186,7 +188,9 @@ public:
 	{
 		if (m == GAME_OVER)
 		{
-			setHighScore(this->points);
+			if (points > high_score)
+				setHighScore(points);
+
 			game_over = true;
 		}
 	}
