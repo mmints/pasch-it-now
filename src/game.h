@@ -109,7 +109,7 @@ public:
 			}
 		}
 
-		{ // Create generator
+		{ // Create a generator for spawning the Tetrominos
 			generator = new Generator();
 			GeneratorBehaviourComponent * generator_behaviour = new GeneratorBehaviourComponent();
 			generator_behaviour->Create(system, world, generator, &game_objects, &tetromino_pool);
@@ -176,25 +176,7 @@ public:
 		delete world;
 	}
 
-	/*The following functions are additional*/
-
-	void Draw()
-	{
-		char msg[1024];
-
-		sprintf_s(msg, "%i", points);
-		system->drawText(520, 210, msg);
-
-		sprintf_s(msg, "%i", high_score);
-		system->drawText(520, 330, msg);
-
-		if (game_over)
-		{
-			sprintf_s(msg, "GAME OVER");
-			system->drawText(128, 112, msg);
-		}
-	}
-
+	// Help functions for point management of the game
 	void countPoints(bool &on_stack)
 	{
 		if (on_stack)
@@ -222,4 +204,23 @@ public:
 
 		return high_score;
 	}
+
+	// Help function for rendetring text
+	void Draw()
+	{
+		char msg[1024];
+
+		sprintf_s(msg, "%i", points);
+		system->drawText(520, 210, msg);
+
+		sprintf_s(msg, "%i", high_score);
+		system->drawText(520, 330, msg);
+
+		if (game_over)
+		{
+			sprintf_s(msg, "GAME OVER");
+			system->drawText(128, 112, msg);
+		}
+	}
+
 };
