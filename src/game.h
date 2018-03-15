@@ -158,14 +158,6 @@ public:
 	virtual void Draw()
 	{
 		char msg[1024];
-		//sprintf_s(msg, "Test Enviroment");
-		//system->drawText(450, 112, msg);
-
-		//sprintf_s(msg, "SCORE");
-		//system->drawText(500, 50, msg);
-
-		//sprintf_s(msg, "TETROMINOS");
-		//system->drawText(470, 180, msg);
 
 		sprintf_s(msg, "%i", points);
 		system->drawText(520, 210, msg);
