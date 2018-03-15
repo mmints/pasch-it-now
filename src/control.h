@@ -10,7 +10,6 @@ class ControlComponent : public Component
 public:
 	bool enabled;
 
-
 	virtual void Create(AvancezLib* system, Tetromino * tetromino, std::set<GameObject*> * game_objects, PhysicsComponent * physic)
 	{
 		Component::Create(system, tetromino, game_objects);
@@ -32,7 +31,6 @@ public:
 	{
 		if (enabled)
 		{		
-		
 			{ // Timestemp for moving control
 				if (prev_y != go->verticalPosition)
 				{
