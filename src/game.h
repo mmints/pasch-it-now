@@ -159,9 +159,6 @@ public:
 	{
 		if (m == GAME_OVER)
 		{
-			if (points > high_score)
-				setHighScore(points);
-
 			game_over = true;
 		}
 	}
@@ -211,15 +208,32 @@ public:
 		char msg[1024];
 
 		sprintf_s(msg, "%i", points);
-		system->drawText(520, 210, msg);
+		system->drawText(510, 280, msg);
 
 		sprintf_s(msg, "%i", high_score);
-		system->drawText(520, 330, msg);
+		system->drawText(510, 470, msg);
 
 		if (game_over)
 		{
 			sprintf_s(msg, "GAME OVER");
-			system->drawText(128, 112, msg);
+			system->drawText(80, 112, msg);
+
+			if (points > high_score)
+			{
+				setHighScore(points);
+
+				sprintf_s(msg, "***");
+				system->drawText(170, 210, msg);
+
+
+				sprintf_s(msg, "High Score");
+				system->drawText(65, 250, msg);
+
+				sprintf_s(msg, "***");
+				system->drawText(170, 290, msg);
+
+			}
+
 		}
 	}
 
