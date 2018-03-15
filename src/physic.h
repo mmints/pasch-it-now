@@ -37,7 +37,6 @@ public:
 			body->CreateFixture(&fixtureDef);
 
 			center = body->GetLocalCenter();
-	//		SDL_Log("O :: Center of Mass (X, Y) = (%.6f, %.6f)", center.x, center.y);
 
 			this->size_x = 2.f * block;
 			this->size_y = 2.f * block;
@@ -54,7 +53,6 @@ public:
 			body->CreateFixture(&fixtureDef);
 
 			center = body->GetLocalCenter();
-	//		SDL_Log("L :: Center of Mass (X, Y) = (%.6f, %.6f)", center.x, center.y);
 
 			this->size_x = 2.f * block;
 			this->size_y = 3.f * block;
@@ -71,7 +69,6 @@ public:
 			body->CreateFixture(&fixtureDef);
 
 			center = body->GetLocalCenter();
-	//		SDL_Log("J :: Center of Mass (X, Y) = (%.6f, %.6f)", center.x, center.y);
 
 			this->size_x = 2.f * block;
 			this->size_y = 3.f * block;
@@ -84,7 +81,6 @@ public:
 			body->CreateFixture(&fixtureDef);
 
 			center = body->GetLocalCenter();
-	//		SDL_Log("I :: Center of Mass (X, Y) = (%.6f, %.6f)", center.x, center.y);
 
 			this->size_x = 4.f * block;
 			this->size_y = 1.f * block;
@@ -102,8 +98,6 @@ public:
 			body->CreateFixture(&fixtureDef);
 			center = body->GetLocalCenter();
 
-	//		SDL_Log("Z :: Center of Mass (X, Y) = (%.6f, %.6f)", center.x, center.y);
-
 			this->size_x = 3.f * block;
 			this->size_y = 2.f * block;
 
@@ -119,8 +113,6 @@ public:
 
 			body->CreateFixture(&fixtureDef);
 			center = body->GetLocalCenter();
-
-	//		SDL_Log("S :: Center of Mass (X, Y) = (%.6f, %.6f)", center.x, center.y);
 
 			this->size_x = 3.f * block;
 			this->size_y = 2.f * block;
@@ -138,16 +130,12 @@ public:
 			body->CreateFixture(&fixtureDef);
 			center = body->GetLocalCenter();
 
-	//		SDL_Log("T :: Center of Mass (X, Y) = (%.6f, %.6f)", center.x, center.y);
-
 			this->size_x = 3.f * block;
 			this->size_y = 2.f * block;
 
 			break;
 		}
 		body->SetTransform(b2Vec2(pos_x, pos_y), angle * (3.14 / 180));
-//		SDL_Log("Tetromino::angle = %.6f", angle);
-
 	}
 
 	virtual void Create(AvancezLib* system, b2World* world, Tetromino * tetromino, std::set<GameObject*> * game_objects, b2BodyType type, float pos_x, float pos_y, float angle)
@@ -183,10 +171,10 @@ public:
 		float32 angle = body->GetAngle();
 
 		go->horizontalPosition = position.x - size_x;
-		go->verticalPosition = 576 - (position.y + size_y); // Hard coded Window height! Change in final version! <---------!!!!!!!!!!!
+		go->verticalPosition = 576 - (position.y + size_y);
 		go->angle = angle * (-180 / 3.14f);
 
-		if (position.y < 0) // When the box reaches the top of the screen, it disappears.
+		if (position.y < 0) // When the box reaches the bottom of the screen, it disappears.
 		{
 			go->enabled = false;
 			go->Send(GAME_OVER);

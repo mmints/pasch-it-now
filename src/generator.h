@@ -47,7 +47,6 @@ public:
 
 	virtual void Update(float dt)
 	{
-
 		AvancezLib::KeyStatus keys;
 		system->getKeyStatus(keys);
 		tetromino = tetromino_pool->FirstAvailable();
@@ -74,7 +73,6 @@ public:
 		tetromino->AddComponent(controller);
 		tetromino->Init();
 		game_objects->insert(tetromino);
-
 	}
 
 	bool CanSpawn()
