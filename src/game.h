@@ -1,23 +1,19 @@
 class Game : public GameObject
-{
-	std::set<GameObject*> game_objects;	// http://www.cplusplus.com/reference/set/set/
-	
-	// TODO: Integrate world into AnvancezLib
-	AvancezLib* system;
-	b2World * world;
-
-	GameObject * canvas;
-	GUI * gui;
-	
-	Generator * generator;
-	ObjectPool<Tetromino> tetromino_pool;
-
+{	
 	bool game_over;
-
-	Tetromino * base;
-
 	int points;
 	int high_score;
+
+	AvancezLib* system;
+	b2World * world;
+	
+	GameObject * canvas;
+	Tetromino * base;
+	GUI * gui;
+	Generator * generator;
+
+	ObjectPool<Tetromino> tetromino_pool;
+	std::set<GameObject*> game_objects;	// http://www.cplusplus.com/reference/set/set/
 
 public:
 	virtual void Create(AvancezLib* system)
@@ -32,9 +28,6 @@ public:
 		{ // canvas for physic enviroment
 			canvas = new GameObject();
 
-			//PhysicsComponent * base_line = new PhysicsComponent();
-			//base_line->CreateEdge(system, world, canvas, &game_objects, 0, 0, 640, 0);
-
 			PhysicsComponent * base_left = new PhysicsComponent();
 			base_left->CreateEdge(system, world, canvas, &game_objects, 64, 0, 64, 576);
 
@@ -42,20 +35,21 @@ public:
 			base_right->CreateEdge(system, world, canvas, &game_objects, 384, 0, 384, 576);
 
 			canvas->Create();
-			//canvas->AddComponent(base_line);
 			canvas->AddComponent(base_left);
 			canvas->AddComponent(base_right);
 			game_objects.insert(canvas);
 		}
 
-		gui = new GUI();
-		
-		RenderComponent * background = new RenderComponent();
-		background->Create(system, gui, &game_objects, "data/Background.png");
+		{ // Load GUI textture to the background
+			gui = new GUI();
 
-		gui->Create();
-		gui->AddComponent(background);
-		game_objects.insert(gui);
+			RenderComponent * background = new RenderComponent();
+			background->Create(system, gui, &game_objects, "data/Background.png");
+
+			gui->Create();
+			gui->AddComponent(background);
+			game_objects.insert(gui);
+		}
 
 		{ // Create a basement for constructing the tower
 			base = new Tetromino();
@@ -72,63 +66,67 @@ public:
 			game_objects.insert(base);
 		}
 
-		generator = new Generator();
-		GeneratorBehaviourComponent * generator_behaviour = new GeneratorBehaviourComponent();
-		generator_behaviour->Create(system, world, generator, &game_objects, &tetromino_pool);
-
-		generator->Create();
-		generator->AddComponent(generator_behaviour);
-		game_objects.insert(generator);
-
-		// generate a object pool of random tetrominos
-		tetromino_pool.Create(100);
-		for (auto tetromino = tetromino_pool.pool.begin(); tetromino != tetromino_pool.pool.end(); tetromino++)
-		{
-			Tetromino::TetrominoType tetromino_type = Tetromino::TetrominoType(rand() % 7);
-			(*tetromino)->Create(tetromino_type);
-
-			RenderComponent * render = new RenderComponent();
-			switch (tetromino_type)
+		{ // generate a object pool of random tetrominos
+			tetromino_pool.Create(100);
+			for (auto tetromino = tetromino_pool.pool.begin(); tetromino != tetromino_pool.pool.end(); tetromino++)
 			{
-			case Tetromino::O_Tetromino:
-				render->Create(system, *tetromino, &game_objects, "data/O_64x64.png");
-				break;
+				Tetromino::TetrominoType tetromino_type = Tetromino::TetrominoType(rand() % 7);
+				(*tetromino)->Create(tetromino_type);
 
-			case Tetromino::L_Tetromino:
-				render->Create(system, *tetromino, &game_objects, "data/L_64x96.png");
-				break;
+				RenderComponent * render = new RenderComponent();
+				switch (tetromino_type)
+				{
+				case Tetromino::O_Tetromino:
+					render->Create(system, *tetromino, &game_objects, "data/O_64x64.png");
+					break;
 
-			case Tetromino::J_Tetromino:
-				render->Create(system, *tetromino, &game_objects, "data/J_64x96.png");
-				break;
+				case Tetromino::L_Tetromino:
+					render->Create(system, *tetromino, &game_objects, "data/L_64x96.png");
+					break;
 
-			case Tetromino::I_Tetromino:
-				render->Create(system, *tetromino, &game_objects, "data/I_128x32.png");
-				break;
+				case Tetromino::J_Tetromino:
+					render->Create(system, *tetromino, &game_objects, "data/J_64x96.png");
+					break;
 
-			case Tetromino::Z_Tetromino:
-				render->Create(system, *tetromino, &game_objects, "data/Z_96x64.png");
-				break;
+				case Tetromino::I_Tetromino:
+					render->Create(system, *tetromino, &game_objects, "data/I_128x32.png");
+					break;
 
-			case Tetromino::S_Tetromino:
-				render->Create(system, *tetromino, &game_objects, "data/S_96x64.png");
-				break;
+				case Tetromino::Z_Tetromino:
+					render->Create(system, *tetromino, &game_objects, "data/Z_96x64.png");
+					break;
 
-			case Tetromino::T_Tetromino:
-				render->Create(system, *tetromino, &game_objects, "data/T_96x64.png");
-				break;
+				case Tetromino::S_Tetromino:
+					render->Create(system, *tetromino, &game_objects, "data/S_96x64.png");
+					break;
+
+				case Tetromino::T_Tetromino:
+					render->Create(system, *tetromino, &game_objects, "data/T_96x64.png");
+					break;
+				}
+				(*tetromino)->AddComponent(render);
+				(*tetromino)->AddReceiver(this);
 			}
-			(*tetromino)->AddComponent(render);
-			(*tetromino)->AddReceiver(this);
 		}
+
+		{ // Create generator
+			generator = new Generator();
+			GeneratorBehaviourComponent * generator_behaviour = new GeneratorBehaviourComponent();
+			generator_behaviour->Create(system, world, generator, &game_objects, &tetromino_pool);
+
+			generator->Create();
+			generator->AddComponent(generator_behaviour);
+			game_objects.insert(generator);
+		}
+
 	}
 
 	virtual void Init()
 	{
 		game_over = false;
-		points = 0;
+		points = 0; 		SDL_Log("Points: %i", points);
+
 		high_score = getHighScore();
-		SDL_Log("Points: %i", points);
 		for (auto go = game_objects.begin(); go != game_objects.end(); go++)
 		{
 			(*go)->Init();
