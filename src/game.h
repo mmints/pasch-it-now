@@ -168,7 +168,7 @@ public:
 
 		if (IsGameOver())
 		{
-			sprintf_s(msg, "*** G A M E  O V E R ***");
+			sprintf_s(msg, "GAME OVER");
 			system->drawText(128, 112, msg);
 		}
 
