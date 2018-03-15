@@ -14,6 +14,7 @@ bool AvancezLib::init(int width, int height)
 		return false;
 	}
 
+
 	//Create window
 	window = SDL_CreateWindow("Pasch It Now! (640 x 576)", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
 	if (window == NULL)
