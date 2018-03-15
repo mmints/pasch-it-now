@@ -13,7 +13,6 @@ public:
 	{
 		SDL_Log("Generator::Destroy");
 		GameObject::Destroy();
-
 	}
 };
 

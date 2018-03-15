@@ -11,7 +11,5 @@ public:
 	{
 		SDL_Log("GUI::Destroy");
 		GameObject::Destroy();
-
 	}
-
 };

@@ -26,4 +26,10 @@ public:
 		SDL_Log("Tetromino::Init");
 		GameObject::Init();
 	}
+
+	virtual void Destroy()
+	{
+		SDL_Log("Tetromino::Destroy");
+		GameObject::Destroy();
+	}
 };
