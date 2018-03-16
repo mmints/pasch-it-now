@@ -11,13 +11,10 @@
 #include "object_pool.h"
 #include "component.h"
 
-// Game Objects
+// Game Objects and Conponents
 #include "tetromino.h"
-#include "gui.h"
-// Additional Components
 #include "physic.h"
 #include "control.h"
-
 #include "generator.h"
 
 // Main game file

@@ -44,9 +44,6 @@
     <ClInclude Include="src\component.h">
       <Filter>Framework\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\gui.h">
-      <Filter>Game Object</Filter>
-    </ClInclude>
     <ClInclude Include="src\physic.h">
       <Filter>Components</Filter>
     </ClInclude>

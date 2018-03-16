@@ -31,7 +31,6 @@
     <ClInclude Include="src\game.h" />
     <ClInclude Include="src\game_object.h" />
     <ClInclude Include="src\generator.h" />
-    <ClInclude Include="src\gui.h" />
     <ClInclude Include="src\object_pool.h" />
     <ClInclude Include="src\physic.h" />
     <ClInclude Include="src\tetromino.h" />

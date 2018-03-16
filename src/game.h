@@ -9,7 +9,7 @@ class Game : public GameObject
 	
 	GameObject * canvas;
 	Tetromino * base;
-	GUI * gui;
+	GameObject * gui;
 	Generator * generator;
 
 	ObjectPool<Tetromino> tetromino_pool;
@@ -41,7 +41,7 @@ public:
 		}
 
 		{ // Load GUI textture to the background
-			gui = new GUI();
+			gui = new GameObject();
 
 			RenderComponent * background = new RenderComponent();
 			background->Create(system, gui, &game_objects, "data/Background.png");
