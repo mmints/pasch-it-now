@@ -31,30 +31,3 @@ void RenderComponent::Destroy()
 		sprite->destroy();
 	sprite = NULL;
 }
-
-
-void CollideComponent::Create(AvancezLib* system, GameObject * go, std::set<GameObject*> * game_objects, ObjectPool<GameObject> * coll_objects)
-{
-	Component::Create(system, go, game_objects);
-	this->coll_objects = coll_objects;
-}
-
-
-void CollideComponent::Update(float dt)
-{
-	for (auto i = 0; i < coll_objects->pool.size(); i++)
-	{
-		GameObject * go0 = coll_objects->pool[i];
-		if (go0->enabled)
-		{
-			if ((go0->horizontalPosition > go->horizontalPosition - 10) &&
-				(go0->horizontalPosition < go->horizontalPosition + 10) &&
-				(go0->verticalPosition   > go->verticalPosition - 10) &&
-				(go0->verticalPosition   < go->verticalPosition + 10))
-			{
-				go->Receive(HIT);
-				go0->Receive(HIT);
-			}
-		}
-	}
-}
