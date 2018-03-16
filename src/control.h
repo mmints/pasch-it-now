@@ -10,13 +10,13 @@ class ControlComponent : public Component
 public:
 	bool enabled;
 
-	virtual void Create(AvancezLib* system, Tetromino * tetromino, std::set<GameObject*> * game_objects, PhysicsComponent * physic)
+	void Create(AvancezLib* system, Tetromino * tetromino, std::set<GameObject*> * game_objects, PhysicsComponent * physic)
 	{
 		Component::Create(system, tetromino, game_objects);
 		this->body = physic->body;
 	}
 
-	virtual void Init()
+	void Init()
 	{
 		enabled = true;
 		SDL_Log("Controller Enabled");
@@ -27,7 +27,7 @@ public:
 		Component::Init();
 	}
 
-	virtual void Update(float dt)
+	void Update(float dt)
 	{
 		if (enabled)
 		{		

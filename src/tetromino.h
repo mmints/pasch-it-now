@@ -16,18 +16,18 @@ public:
 
 	TetrominoType tetromino_type;
 
-	virtual void Create(TetrominoType tetromino_type)
+	void Create(TetrominoType tetromino_type)
 	{
 		this->tetromino_type = tetromino_type;
 	}
 
-	virtual void Init()
+	void Init()
 	{
 		SDL_Log("Tetromino::Init");
 		GameObject::Init();
 	}
 
-	virtual void Destroy()
+	void Destroy()
 	{
 		SDL_Log("Tetromino::Destroy");
 		GameObject::Destroy();

@@ -9,7 +9,7 @@ public:
 
 	b2Body * body;
 
-	virtual void Create(AvancezLib* system, b2World* world, Tetromino * tetromino, std::set<GameObject*> * game_objects, b2BodyType type, float pos_x, float pos_y, float block_size, float angle)
+	void Create(AvancezLib* system, b2World* world, Tetromino * tetromino, std::set<GameObject*> * game_objects, b2BodyType type, float pos_x, float pos_y, float block_size, float angle)
 	{
 		Component::Create(system, tetromino, game_objects);
 
@@ -138,13 +138,13 @@ public:
 		body->SetTransform(b2Vec2(pos_x, pos_y), angle * (3.14 / 180));
 	}
 
-	virtual void Create(AvancezLib* system, b2World* world, Tetromino * tetromino, std::set<GameObject*> * game_objects, b2BodyType type, float pos_x, float pos_y, float angle)
+	void Create(AvancezLib* system, b2World* world, Tetromino * tetromino, std::set<GameObject*> * game_objects, b2BodyType type, float pos_x, float pos_y, float angle)
 	{
 		float block_size = 32.f;
 		Create(system, world, tetromino, game_objects, type, pos_x, pos_y, block_size, angle);
 	}
 
-	virtual void CreateEdge(AvancezLib* system, b2World* world, GameObject * go, std::set<GameObject*> * game_objects, float begin_x, float begin_y, float end_x, float end_y)
+	void CreateEdge(AvancezLib* system, b2World* world, GameObject * go, std::set<GameObject*> * game_objects, float begin_x, float begin_y, float end_x, float end_y)
 	{
 		Component::Create(system, go, game_objects);
 
@@ -163,7 +163,7 @@ public:
 		body->CreateFixture(&fixtureDef);
 	}
 
-	virtual void Update(float dt)
+	void Update(float dt)
 	{
 		b2Vec2 position = body->GetPosition();
 		float32 angle = body->GetAngle();

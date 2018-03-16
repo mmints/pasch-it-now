@@ -28,7 +28,7 @@ class GeneratorBehaviourComponent : public Component
 	Generator * generator;
 
 public:
-	virtual void Create(AvancezLib* system, b2World* world, Generator * generator, std::set<GameObject*> * game_objects, ObjectPool<Tetromino> * tetromino_pool)
+	void Create(AvancezLib* system, b2World* world, Generator * generator, std::set<GameObject*> * game_objects, ObjectPool<Tetromino> * tetromino_pool)
 	{
 		Component::Create(system, generator, game_objects);
 
@@ -37,14 +37,14 @@ public:
 		this->generator = generator;
 	}
 
-	virtual void Init()
+	void Init()
 	{
 		tetromino = tetromino_pool->FirstAvailable();
 		generate();
 		Component::Init();
 	}
 
-	virtual void Update(float dt)
+	void Update(float dt)
 	{
 		AvancezLib::KeyStatus keys;
 		system->getKeyStatus(keys);
@@ -60,7 +60,7 @@ public:
 	}
 
 	// Generates/Spawn the Tetraminos with a random angle
-	virtual void generate()
+	void generate()
 	{
 		physic = new PhysicsComponent();
 		physic->Create(system, world, tetromino, game_objects, b2_dynamicBody, 224, 576 - 32, (rand() % 4) * 90.f);

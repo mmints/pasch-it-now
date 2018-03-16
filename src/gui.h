@@ -1,13 +1,13 @@
 class GUI : public GameObject
 {
 public:
-	virtual void Init()
+	void Init()
 	{
 		SDL_Log("GUI::Init");
 		GameObject::Init();
 	}
 
-	virtual void Destroy()
+	void Destroy()
 	{
 		SDL_Log("GUI::Destroy");
 		GameObject::Destroy();
