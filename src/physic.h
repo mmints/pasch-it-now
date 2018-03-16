@@ -20,16 +20,16 @@ public:
 		def.type = type;
 		body = world->CreateBody(&def);
 
-		b2FixtureDef fixtureDef;
+		b2FixtureDef fixtureDef; // A fixture included all necessary information for physics calculation
 		fixtureDef.density = 0.8f;
 		fixtureDef.friction = 1.0f;
-		fixtureDef.restitution = 0.01f; // Just for fun
+		fixtureDef.restitution = 0.01f;
 
 		b2PolygonShape shape;
 
 		b2Vec2 center;
 
-		switch (tetromino->tetromino_type)
+		switch (tetromino->tetromino_type) // apply shapes to corresponding tetrominos
 		{
 		case Tetromino::O_Tetromino:
 			shape.SetAsBox(2.f * block, 2.f * block);
@@ -144,6 +144,7 @@ public:
 		Create(system, world, tetromino, game_objects, type, pos_x, pos_y, block_size, angle);
 	}
 
+	// Simple function for crating borders and edges
 	void CreateEdge(AvancezLib* system, b2World* world, GameObject * go, std::set<GameObject*> * game_objects, float begin_x, float begin_y, float end_x, float end_y)
 	{
 		Component::Create(system, go, game_objects);
